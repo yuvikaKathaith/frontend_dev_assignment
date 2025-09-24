@@ -34,7 +34,7 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className={`px-3 py-1 rounded-md text-sm font-medium ${
+        className={`px-5 py-2 rounded-md text-md font-medium ${
           currentPage === 1
             ? "bg-blue-800 text-gray-500 cursor-not-allowed"
             : "bg-gray-900 text-white hover:bg-gray-700"
@@ -47,7 +47,7 @@ export default function Pagination({
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`px-3 py-1 rounded-md text-sm font-medium ${
+          className={`px-5 py-2 rounded-md text-md font-medium ${
             currentPage === page
               ? "bg-blue-800 text-white"
               : "bg-gray-200 text-gray-900 hover:bg-gray-300"
@@ -60,7 +60,7 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className={`px-3 py-1 rounded-md text-sm font-medium ${
+        className={`px-5 py-2 rounded-md text-md font-medium ${
           currentPage === totalPages
             ? "bg-blue-800 text-gray-500 cursor-not-allowed"
             : "bg-gray-900 text-white hover:bg-gray-700"
