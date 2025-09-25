@@ -10,11 +10,13 @@ import PriceFilter from "./components/priceFilter";
 const WorkerCard = memo(({ worker }: { worker: WorkerType }) => (
   <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
     <div className="relative w-full h-80">
-      <img
+      <Image
         loading="lazy"
         src={worker.image}
         alt={worker.name}
-        className="object-fill"
+        fill
+        unoptimized
+        className="object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
       <div className="absolute bottom-0 left-0 p-4 text-white">
