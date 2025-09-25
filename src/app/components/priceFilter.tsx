@@ -1,3 +1,13 @@
+"use client";
+import React from "react";
+
+interface PriceFilterProps {
+  minPrice: number | "";
+  maxPrice: number | "";
+  onMinChange: (val: number | "") => void;
+  onMaxChange: (val: number | "") => void;
+}
+
 export default function PriceFilter({
   minPrice,
   maxPrice,
@@ -21,7 +31,8 @@ export default function PriceFilter({
         placeholder="Min Price"
         value={minPrice}
         onChange={handleMinChange}
-        className="border border-gray-500 rounded px-2 py-1 w-25"
+        className="border border-gray-500 rounded px-2 py-1 w-28"
+        aria-label="Minimum Price"
       />
       <input
         type="number"
@@ -29,6 +40,7 @@ export default function PriceFilter({
         value={maxPrice}
         onChange={handleMaxChange}
         className="border border-gray-500 rounded px-2 py-1 w-28"
+        aria-label="Maximum Price"
       />
     </div>
   );

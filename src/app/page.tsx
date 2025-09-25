@@ -113,7 +113,7 @@ export default function WorkersPage() {
             setMaxPrice(pendingMax);
             setCurrentPage(1);
           }}
-          className="px-2 py-1 bg-blue-800 text-white rounded-md hover:bg-blue-700 transition"
+          className="px-4 py-1 bg-blue-800 text-white rounded-md hover:bg-blue-700 transition"
         >
           Apply Filters
         </button>
