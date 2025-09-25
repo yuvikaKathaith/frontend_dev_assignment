@@ -17,26 +17,33 @@ export default function Pagination({
   // Determine the range of pages to display (max 5)
   const pageNumbers: number[] = [];
   let startPage = Math.max(currentPage - 2, 1);
-  let endPage = Math.min(startPage + 4, totalPages);
+  const tentativeEndPage = Math.min(startPage + 4, totalPages);
 
-  // Adjust startPage if we are near the end
-  if (endPage - startPage < 4) {
-    startPage = Math.max(endPage - 4, 1);
+  if (tentativeEndPage - startPage < 4) {
+    startPage = Math.max(tentativeEndPage - 4, 1);
   }
+
+  const endPage = Math.min(startPage + 4, totalPages);
 
   for (let i = startPage; i <= endPage; i++) {
     pageNumbers.push(i);
   }
 
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages && page !== currentPage) {
+      onPageChange(page);
+    }
+  };
+
   return (
     <div className="flex justify-center mt-8 space-x-2">
-        {/* prev */}
+      {/* Prev */}
       <button
-        onClick={() => onPageChange(currentPage - 1)}
+        onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className={`px-5 py-2 rounded-md text-md font-medium ${
           currentPage === 1
-            ? "bg-blue-800 text-gray-500 cursor-not-allowed"
+            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
             : "bg-gray-900 text-white hover:bg-gray-700"
         }`}
       >
@@ -46,7 +53,7 @@ export default function Pagination({
       {pageNumbers.map((page) => (
         <button
           key={page}
-          onClick={() => onPageChange(page)}
+          onClick={() => handlePageChange(page)}
           className={`px-5 py-2 rounded-md text-md font-medium ${
             currentPage === page
               ? "bg-blue-800 text-white"
@@ -56,13 +63,14 @@ export default function Pagination({
           {page}
         </button>
       ))}
-      {/* next */}
+
+      {/* Next */}
       <button
-        onClick={() => onPageChange(currentPage + 1)}
+        onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className={`px-5 py-2 rounded-md text-md font-medium ${
           currentPage === totalPages
-            ? "bg-blue-800 text-gray-500 cursor-not-allowed"
+            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
             : "bg-gray-900 text-white hover:bg-gray-700"
         }`}
       >
