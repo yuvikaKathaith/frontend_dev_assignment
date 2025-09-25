@@ -8,10 +8,7 @@ import ServiceFilter from "./components/serviceFilter";
 import PriceFilter from "./components/priceFilter";
 
 const WorkerCard = memo(({ worker }: { worker: WorkerType }) => (
-  <div
-    key={worker.id}
-    className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
-  >
+  <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
     <div className="relative w-full h-80">
       <Image
         loading="lazy"
@@ -55,9 +52,10 @@ export default function WorkersPage() {
       try {
         const response = await import("../../workers.json");
         setWorkersData(response.default);
-        setLoading(false);
       } catch (error) {
         console.error("Failed to load workers:", error);
+      } finally {
+        setLoading(false);
       }
     };
     loadData();
@@ -67,7 +65,6 @@ export default function WorkersPage() {
   const filteredWorkers = useMemo(() => {
     return workersData
       .filter((worker) => worker.pricePerDay > 0)
-      .filter((worker) => worker.id !== null)
       .filter((worker) => {
         const matchesService =
           serviceFilter === "all" || worker.service === serviceFilter;
@@ -87,12 +84,11 @@ export default function WorkersPage() {
   );
 
   const uniqueServices = useMemo(() => {
-    const allServices = workersData.map((w) => w.service);
-    return Array.from(new Set(allServices));
+    return Array.from(new Set(workersData.map((w) => w.service)));
   }, [workersData]);
 
   return (
-    <main className="min-h-screen px-4 py-8 bg-gradient-to-r">
+    <main className="min-h-screen px-4 py-8 bg-gradient-to-r from-gray-100 to-gray-200">
       <h1 className="text-4xl font-bold mb-8 text-center text-gray-900 drop-shadow-lg">
         Our Workers
       </h1>
@@ -102,16 +98,14 @@ export default function WorkersPage() {
         <ServiceFilter
           services={uniqueServices}
           selectedService={pendingService}
-          onChange={(val) => setPendingService(val)}
+          onChange={setPendingService}
         />
         <PriceFilter
           minPrice={pendingMin}
           maxPrice={pendingMax}
-          onMinChange={(val) => setPendingMin(val)}
-          onMaxChange={(val) => setPendingMax(val)}
+          onMinChange={(val) => setPendingMin(val === "" ? "" : Number(val))}
+          onMaxChange={(val) => setPendingMax(val === "" ? "" : Number(val))}
         />
-
-        {/* apply bfilters button */}
         <button
           onClick={() => {
             setServiceFilter(pendingService);
@@ -119,7 +113,7 @@ export default function WorkersPage() {
             setMaxPrice(pendingMax);
             setCurrentPage(1);
           }}
-          className="px-4 py-1 bg-blue-800 text-white rounded-md hover:bg-blue-700 transition"
+          className="px-2 py-1 bg-blue-800 text-white rounded-md hover:bg-blue-700 transition"
         >
           Apply Filters
         </button>
@@ -127,20 +121,19 @@ export default function WorkersPage() {
 
       {/* displaying workers cards*/}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-        {loading ? (
-          Array.from({ length: 12 }).map((_, i) => <SkeletonCard key={i} />)
-        ) : currentWorkers.length > 0 ? (
-          currentWorkers.map((worker) => (
-            <WorkerCard key={worker.id} worker={worker} />
-          ))
-        ) : (
-          <div className="col-span-full text-center text-gray-600 text-lg font-medium py-10">
-            No matches found 
-          </div>
-        )}
+        {loading
+          ? Array.from({ length: 12 }).map((_, i) => <SkeletonCard key={i} />)
+          : currentWorkers.length > 0
+          ? currentWorkers.map((worker) => <WorkerCard key={worker.id} worker={worker} />)
+          : (
+            <div className="col-span-full text-center text-gray-600 text-lg font-medium py-10">
+              No matches found
+            </div>
+          )}
       </div>
+
       {/* pagination */}
-      {!loading && (
+      {!loading && totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
