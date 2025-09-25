@@ -47,19 +47,42 @@ export default function WorkersPage() {
   const [pendingMin, setPendingMin] = useState<number | "">("");
   const [pendingMax, setPendingMax] = useState<number | "">("");
 
+  const [error, setError] = useState("");
+
   useEffect(() => {
-    const loadData = async () => {
+    const fetchWorkers = async () => {
+      setLoading(true);
+      setError("");
+
       try {
-        const response = await import("../../workers.json");
-        setWorkersData(response.default);
-      } catch (error) {
-        console.error("Failed to load workers:", error);
+        const res = await fetch("/api/workers");
+        if (!res.ok) throw new Error("Failed to fetch workers");
+
+        const data: WorkerType[] = await res.json();
+        setWorkersData(data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load workers. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
-    loadData();
+    fetchWorkers();
   }, []);
+
+  // useEffect(() => {
+  //   const loadData = async () => {
+  //     try {
+  //       const response = await import("../../workers.json");
+  //       setWorkersData(response.default);
+  //     } catch (error) {
+  //       console.error("Failed to load workers:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   loadData();
+  // }, []);
 
   //applying filters onclick of apply filters button
   const filteredWorkers = useMemo(() => {
@@ -118,20 +141,30 @@ export default function WorkersPage() {
           Apply Filters
         </button>
       </div>
+ 
+      {/* error */}{" "}
+      {error && (
+        <div className="col-span-full text-center text-red-600 font-medium py-4">
+          {" "}
+          {error}{" "}
+        </div>
+      )}
 
       {/* displaying workers cards*/}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-        {loading
-          ? Array.from({ length: 12 }).map((_, i) => <SkeletonCard key={i} />)
-          : currentWorkers.length > 0
-          ? currentWorkers.map((worker) => <WorkerCard key={worker.id} worker={worker} />)
-          : (
-            <div className="col-span-full text-center text-gray-600 text-lg font-medium py-10">
-              No matches found
-            </div>
-          )}
+        {loading ? (
+          Array.from({ length: 12 }).map((_, i) => <SkeletonCard key={i} />)
+        ) : currentWorkers.length > 0 ? (
+          currentWorkers.map((worker) => (
+            <WorkerCard key={worker.id} worker={worker} />
+          ))
+        ) : (
+          <div className="col-span-full text-center text-gray-600 text-lg font-medium py-10">
+            No matches found
+          </div>
+        )}
       </div>
-
+      
       {/* pagination */}
       {!loading && totalPages > 1 && (
         <Pagination
