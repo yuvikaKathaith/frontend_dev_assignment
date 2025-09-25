@@ -14,57 +14,90 @@ Note: External images (Random User API) may not display in deployed version due 
 
 ## Features Implemented
 
-### 1. Cards Layout & Responsiveness
+### Cards Layout & Responsiveness
 - Fixed the grid layout of worker cards for desktop, tablet, and mobile views.
-- Enhanced card design for improved UI/UX.
-- Fully responsive design across all screen sizes.
+- Improved card design for enhanced UI/UX.
+- Fully responsive design across all screen sizes with smooth animations on hover.
 
-### 2. Sticky Navbar
+### Sticky Navbar
 - Implemented a clean, responsive navigation bar that remains fixed while scrolling.
-- Designed for both desktop and mobile devices.
+- Works for desktop and mobile devices.
 
-### 3. Page Load & Performance Optimizations
+### Page Load & Performance Optimizations
 - **Lazy loading** for images and non-critical components.
 - **Memoization** to prevent unnecessary re-renders.
 - **Skeleton loading screens** for improved UX during data fetching.
 
-### 4. Pagination
-- Added pagination to the workers listing page.
-- Each page loads **9–12 cards** per page for a smooth experience.
+### Pagination & Service Filters
+- Pagination added for the workers listing page (9–12 cards per page).
+- Filters for **price per day** and **type of service** integrated with pagination.
 
-### 5. Service Filters
-- Filters added for **price per day** and **type of service**.
-- Fully integrated with pagination for seamless functionality.
-
-### 6. Bug Fixes
-- Fixed layout, responsiveness, and configuration issues in `page.tsx` and related components.
-- Resolved console warnings and errors.
-- Improved maintainability and readability of code.
-
-### 7. API Integration
-- Created `/api/workers` API route to serve the existing JSON data.
-- Frontend updated to **fetch data via API** using `useEffect` and `fetch`.
-- Existing JSON import logic **commented out** for reference.
+### API Integration
+- Served existing `workers.json` data via `/api/workers` API route.
+- Frontend fetches this data using `useEffect` and `fetch`.
+- Commented out original static JSON import for reference.
 - Implemented:
-  - Loading state with skeleton screens.
+  - Loading states with skeleton screens.
   - Error handling for failed API requests.
   - Basic memoization to prevent redundant API calls.
 
----
-
-## Technologies Used
-
-- **Frontend:** React, Next.js, TypeScript, Tailwind CSS  
-- **State & Data Fetching:** useEffect, fetch, memoization  
-- **Optimizations:** Lazy loading, Skeleton screens, Performance enhancements  
-- **Component Development:** Modular and reusable component-driven architecture  
-- **Version Control:** Git with detailed commit history  
+### Bug Fixes & Optimizations
+- Fixed layout/responsiveness issues in `page.tsx` and other components.
+- Resolved console warnings and errors.
+- Improved maintainability and readability of code.
 
 ---
 
-## Extra Improvements
+## Assumptions & Trade-offs
 
-- Enhanced UI/UX with subtle hover effects and transitions.
-- Fully responsive design for all devices.
-- Clean, readable, and maintainable codebase following best practices.
+- **Assumptions:**
+  - JSON structure provided in the assignment is fixed and should not be altered.
+  - Images may not load in production due to Random User API server-side restrictions.
 
+- **Trade-offs / Known Issues:**
+  - External Random User images may not display in deployed version (works locally).
+  - Some animations (hover effects, skeleton transitions) are minimal to maintain performance.
+  - No caching mechanism for API beyond basic memoization.
+
+---
+
+## Screenshots
+![Desktop View](./public/desktop.png)  
+![Mobile View](./public/mobile.png)  
+
+---
+## Local Setup & Running the Project
+
+### Prerequisites
+- **Node.js:** v18.x or higher  
+- **npm:** v9.x or higher  
+
+### Steps to Run Locally
+
+1. **Clone the repository**  
+```bash
+git clone https://github.com/yuvikaKathaith/frontend_dev_assignment.git
+cd frontend_dev_assignment
+```
+
+2. **Install Dependencies**  
+```bash
+npm install
+```
+
+3. Run locally
+```bash
+npm run dev
+```
+Open http://localhost:3000 in your browser.
+
+4. Build for production
+```bash 
+npm run build
+npm start
+```
+
+5. Run tests
+```bash
+npm test
+```
