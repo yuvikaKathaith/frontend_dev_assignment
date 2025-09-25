@@ -1,85 +1,70 @@
-# Frontend Developer Intern Assignment  
+# Frontend Developer Intern Assignment – SolveEase
 
-## Mandatory Tasks
-- Follow SolveEase on [Github](https://github.com/solve-ease) and [Linkedin](https://www.linkedin.com/company/solve-ease)
-- Star this repo
+## Overview
 
-## Objective  
-This assignment is designed to assess your practical skills in **React, Next.js, TypeScript, Tailwind CSS, and frontend optimizations**. You will work on an existing **Next.js application** that contains layout/design issues and some configuration bugs. Your task is to identify and resolve these issues, and implement the listed features to enhance the overall user experience. 
+This assignment evaluates practical skills in **React, Next.js, TypeScript, Tailwind CSS**, and **frontend optimizations**. The goal was to enhance an existing Next.js application by resolving layout/design issues, fixing bugs, and implementing requested features for a better user experience.
+
+---
+## Deployed Link
+```bash
+ https://frontend-dev-assignment-gray.vercel.app/
+```
+
+Note: External images (Random User API) may not display in deployed version due to server-side fetch restrictions. Images work correctly when running locally.
+
+## Features Implemented
+
+### 1. Cards Layout & Responsiveness
+- Fixed the grid layout of worker cards for desktop, tablet, and mobile views.
+- Enhanced card design for improved UI/UX.
+- Fully responsive design across all screen sizes.
+
+### 2. Sticky Navbar
+- Implemented a clean, responsive navigation bar that remains fixed while scrolling.
+- Designed for both desktop and mobile devices.
+
+### 3. Page Load & Performance Optimizations
+- **Lazy loading** for images and non-critical components.
+- **Memoization** to prevent unnecessary re-renders.
+- **Skeleton loading screens** for improved UX during data fetching.
+
+### 4. Pagination
+- Added pagination to the workers listing page.
+- Each page loads **9–12 cards** per page for a smooth experience.
+
+### 5. Service Filters
+- Filters added for **price per day** and **type of service**.
+- Fully integrated with pagination for seamless functionality.
+
+### 6. Bug Fixes
+- Fixed layout, responsiveness, and configuration issues in `page.tsx` and related components.
+- Resolved console warnings and errors.
+- Improved maintainability and readability of code.
+
+### 7. API Integration
+- Created `/api/workers` API route to serve the existing JSON data.
+- Frontend updated to **fetch data via API** using `useEffect` and `fetch`.
+- Existing JSON import logic **commented out** for reference.
+- Implemented:
+  - Loading state with skeleton screens.
+  - Error handling for failed API requests.
+  - Basic memoization to prevent redundant API calls.
 
 ---
 
-## Tasks  
+## Technologies Used
 
-### 1. Fix Cards Layout & Responsiveness  
-- Correct the existing card grid layout.  
-- Improve the overall card design (UI/UX sensibility expected).  
-- Ensure the page is fully responsive across devices (desktop, tablet, mobile).  
-
-### 2. Add Navbar (Sticky)  
-- Implement a navigation bar that remains fixed at the top while scrolling.  
-- Design should be clean and responsive.  
-
-### 3. Optimize Page Load & Performance  
-- Implement optimizations such as:  
-  - **Lazy loading** for images and non-critical components.  
-  - **Memoization** to avoid unnecessary re-renders.  
-  - **Skeleton loading screens** for better UX during data fetch.  
-
-### 4. Implement Pagination  
-- Add pagination for the workers listing page.  
-- Each page should load a suitable number of items (e.g., 9–12 cards per page).  
-
-### 5. Service Filters  
-- Implement filters for workers based on **price/day** and **type of service**.  
-- Filters should work seamlessly with pagination.  
-
-### 6. Bug Fixes  
-- Identify and fix any existing issues in `page.tsx` or configuration files.  
-- Resolve console warnings or errors.  
-- Ensure clean and maintainable code following best practices.  
-
-### 7. API Integration  
-- Currently, the workers’ data is being imported directly from `workers.json`.  
-- Your task is to **serve this data via /api/wprkers API route**.  
-- Update the frontend page to fetch this data using `fetch` (or any modern method such as `useEffect`, `useSWR`, or React Query).
-- Donot delete the existing data loading logic, comment it out.  
-- Implement:  
-  - **Loading state** (use skeleton screens).  
-  - **Error handling** (show a friendly error message if API fails).  
-  - **Basic caching or memoization** to prevent redundant calls.  
+- **Frontend:** React, Next.js, TypeScript, Tailwind CSS  
+- **State & Data Fetching:** useEffect, fetch, memoization  
+- **Optimizations:** Lazy loading, Skeleton screens, Performance enhancements  
+- **Component Development:** Modular and reusable component-driven architecture  
+- **Version Control:** Git with detailed commit history  
 
 ---
 
-## Expectations  
-- Use **TypeScript** and **Tailwind CSS** consistently.  
-- Follow **component-driven development** principles.  
-- Write **clean, readable, and reusable code**.  
-- Optimize for **performance and accessibility**.  
-- Maintain **Git commit history** (no single "final commit").  
+## Extra Improvements
 
----
+- Enhanced UI/UX with subtle hover effects and transitions.
+- Fully responsive design for all devices.
+- Clean, readable, and maintainable codebase following best practices.
 
-## Deliverables  
-1. Fork the assignment repo, make changes there.
-2. Fill in the Goggle Form with your details for submission.
-
----
-
-## Evaluation Criteria  
-- Code quality, readability, and structure.  
-- UI/UX improvements and responsiveness.  
-- Correctness of functionality (filters, pagination, sticky navbar, optimizations).  
-- Debugging and problem-solving approach.  
-- Git usage and commit practices.  
-- Handling of API calls, loading states, and error cases.  
-
----
-
-## Notes  
-- You are free to use libraries like **SWR** or **React Query**, but keep the implementation clean.  
-- Focus on **real-world production quality code**, not just quick fixes. 
-- Add comment for any **bug fix or optimization.** 
-- Document any **extra improvements** you make in your submission.
-
-Good luck 🚀  
