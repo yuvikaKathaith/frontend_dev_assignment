@@ -14,7 +14,6 @@ export default function Pagination({
 }: PaginationProps) {
   if (totalPages <= 1) return null;
 
-  // Determine the range of pages to display (max 5)
   const pageNumbers: number[] = [];
   let startPage = Math.max(currentPage - 2, 1);
   const tentativeEndPage = Math.min(startPage + 4, totalPages);
@@ -37,11 +36,11 @@ export default function Pagination({
 
   return (
     <div className="flex justify-center mt-8 space-x-2">
-      {/* Prev */}
+      {/* prev */}
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className={`px-5 py-2 rounded-md text-md font-medium ${
+        className={`px-3 py-1 rounded-md text-md font-medium ${
           currentPage === 1
             ? "bg-gray-300 text-gray-500 cursor-not-allowed"
             : "bg-gray-900 text-white hover:bg-gray-700"
@@ -54,7 +53,7 @@ export default function Pagination({
         <button
           key={page}
           onClick={() => handlePageChange(page)}
-          className={`px-5 py-2 rounded-md text-md font-medium ${
+          className={`px-3 py-1 rounded-md text-md font-medium ${
             currentPage === page
               ? "bg-blue-800 text-white"
               : "bg-gray-200 text-gray-900 hover:bg-gray-300"
@@ -64,11 +63,11 @@ export default function Pagination({
         </button>
       ))}
 
-      {/* Next */}
+      {/* next */}
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className={`px-5 py-2 rounded-md text-md font-medium ${
+        className={`px-3 py-1 rounded-md text-md font-medium ${
           currentPage === totalPages
             ? "bg-gray-300 text-gray-500 cursor-not-allowed"
             : "bg-gray-900 text-white hover:bg-gray-700"
